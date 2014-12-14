@@ -1,1 +1,8 @@
-@import "../../../vendors/normalize/normalize.min"
+/* Imports */
+
+//vendors
+@import "../../../vendors/normalize/normalize.min";
+
+//resources
+@import "_base";
+@import "_layout";
