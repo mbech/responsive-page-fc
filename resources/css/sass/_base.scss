@@ -9,3 +9,28 @@ $c-white: #FFF;
 $c-lochmara-blue: #097FC9;
 $c-mine-shaft-grey: #383838;
 $c-sushi-green: #7AC543;
+
+/* General Styles */
+// border-box global setting, for easier sizing of divs
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+// html and body sized to full window height
+html {
+  height: 100%
+}
+
+body {
+  min-height: 100%;
+}
+
+// basic font 
+body {
+  font-family: sans-serif;
+  color: $c-black;
+}
+
