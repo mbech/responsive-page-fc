@@ -28,9 +28,19 @@ body {
   min-height: 100%;
 }
 
-// basic font 
+// base tag styles
 body {
   font-family: sans-serif;
+  background-color: $c-cararra-lt-grey;
   color: $c-black;
 }
 
+a {
+  text-decoration: none;
+  color: $c-lochmara-blue;
+}
+
+h2 {
+  font-weight: normal; 
+  font-size: 2em;
+}
