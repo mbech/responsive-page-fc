@@ -30,14 +30,14 @@ body {
 
 // base tag styles
 body {
-  font-family: sans-serif;
   background-color: $c-cararra-lt-grey;
   color: $c-black;
+  font-family: sans-serif;
 }
 
 a {
-  text-decoration: none;
   color: $c-lochmara-blue;
+  text-decoration: none;
 }
 
 h2 {
