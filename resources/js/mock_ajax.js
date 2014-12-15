@@ -22,16 +22,16 @@ RPFC.mockAjax = (function(){
       amount: "100,000",
       term: Math.floor(Math.random()*90),
       avRate: "7.7",
-      progress: 80,
+      progress: Math.floor(Math.random()*100),
       timeLeft: "39 minutes"
     })); 
     data.loans.push(createEntry({
       title: "Hatching Future Growth", 
       risk: "A",
       amount: "60,000",
-      term: 60,
+      term: Math.floor(Math.random()*90),
       avRate: "7.3",
-      progress: 100,
+      progress: Math.floor(Math.random()*100),
       timeLeft: "2 hours"
     })); 
   }
