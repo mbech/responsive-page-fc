@@ -32,6 +32,8 @@ RPFC.tableLoader = (function(){
         // Select subset of data for pagination
         var minShownIndex = itemsPerPage * currentPage;
         var maxShownIndex = minShownIndex + itemsPerPage;
+        console.log(minShownIndex);
+        console.log(maxShownIndex);
         data.loans = data.loans.slice(minShownIndex, maxShownIndex);   
             
         // Clear out currently loaded data and append new subset
@@ -39,6 +41,8 @@ RPFC.tableLoader = (function(){
         $tableTarget.append(createTableHTML(data));
         return data;
       },
-      itemsPerPage: itemsPerPage,
+      setItemsPerPage: function(iPerPage){
+        itemsPerPage = iPerPage;     
+      }
  }
 })();

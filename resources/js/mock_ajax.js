@@ -20,7 +20,7 @@ RPFC.mockAjax = (function(){
       title: "Elevating Profits", 
       risk: "A",
       amount: "100,000",
-      term: 60,
+      term: Math.floor(Math.random()*90),
       avRate: "7.7",
       progress: 80,
       timeLeft: "39 minutes"
