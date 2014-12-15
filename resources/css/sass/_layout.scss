@@ -10,7 +10,7 @@ header {
   @include semi-circle-carat();
 
   @media screen and (min-width: $mc-small){
-    background: url('../../img/borrowed-header-img.jpg') top no-repeat;
+    background: $c-mine-shaft-grey url('../../img/borrowed-header-img.jpg') top no-repeat;
   }
 
   > button {
