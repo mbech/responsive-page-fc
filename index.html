@@ -24,25 +24,28 @@
     <main>
       <h2>Marketplace</h2>
 
-      <table id="marketplace-table">
+      <div id="table-target">
+
+      </div>
+
+      <!-- table script templates -->
+      <!-- Template for medium to large screens-->
+      <script type="text/underscore-template" id="table-row-template">
+        <table>
         <thead>
-          <tr>
-            <th></th>
-            <th class="loan-title">Loan Title</th>
-            <th class="loan-risk">Risk</th>
-            <th class="loan-amount">Amount</th>
-            <th class="loan-term">Term</th>
-            <th class="loan-av-rate">Av. Rate</th>
-            <th class="loan-progress">Progress</th>
-            <th class="loan-time-left">Time Left</th>
-          </tr>
+        <tr>
+        <th class="loan-thumbnail"></th>
+        <th class="loan-title">Loan Title</th>
+        <th class="loan-risk">Risk</th>
+        <th class="loan-amount">Amount</th>
+        <th class="loan-term">Term</th>
+        <th class="loan-av-rate">Av. Rate</th>
+        <th class="loan-progress">Progress</th>
+        <th class="loan-time-left">Time Left</th>
+        </tr>
         </thead>
         <tbody>
-        </tbody>
-      </table>
 
-      <!-- table script template -->
-      <script type="text/underscore-template" id="table-row-template">
         <% _.each(loans, function(loan) { %>
           <tr>
           <td class="loan-thumbnail"></td>
@@ -55,6 +58,39 @@
           <td class="loan-time-left"><%=loan.timeLeft%></td>
           </tr>
           <% }); %>
+        </tbody>
+        </table>
+      </script>
+
+      <!-- Template for smaller screens-->
+      <script type="text/underscore-template" id="table-row-template-sm">
+        <% _.each(loans, function(loan) { %>
+          <div class="loan-row-block">
+          <div class="loan-title">
+          <a href="#"><%=loan.title%></a>
+          </div>    
+          <table>
+          <thead>
+          <tr>
+          <th class="loan-risk">Risk</th>
+          <th class="loan-amount">Amount</th>
+          <th class="loan-term">Term</th>
+          <th class="loan-av-rate">Av. Rate</th>
+          <th class="loan-time-left">Time Left</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+          <td class="loan-risk"><%=loan.risk%></td>
+          <td class="loan-amount">&pound<%=loan.amount%></td>
+          <td class="loan-term"><%=loan.term%></td>
+          <td class="loan-av-rate"><%=loan.avRate%>%</td>
+          <td class="loan-time-left"><%=loan.timeLeft%></td>
+          </tr>
+          </tbody>
+          </table>
+          </div>
+       <% }); %>
       </script>
 
     </main>

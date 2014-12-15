@@ -1,20 +1,23 @@
 RPFC.tableLoader = (function(){
-  var $table = $('#marketplace-table');
+  var $tableTarget = $('#table-target');
   
   var tableHeaders = ["Loan Title", "Risk", "Amount", "Term", "Av. Rate",
-                     "Progress", "Time Left"]
+                     "Progress", "Time Left"];
 
   var createTableHTML = function(){
-       var template  = $('#table-row-template').html()
-       return  _.template(template, JSON.parse(RPFC.mockAjax.tableData()))
+    //Select a table template based on current window width
+    var template  = ($(window).width() > 780) ?
+    $('#table-row-template').html() : $('#table-row-template-sm').html();
+
+    return  _.template(template, JSON.parse(RPFC.mockAjax.tableData()))
   }
 
   return {
-    load: function(dataArray){
-      $table.children('tbody').append(createTableHTML());
+    load: function(){
+      $tableTarget.append(createTableHTML());
     },
     clear: function(){
-      $table.children('tbody').empty(); 
+      $tableTarget.empty(); 
     }
   }
 })();
