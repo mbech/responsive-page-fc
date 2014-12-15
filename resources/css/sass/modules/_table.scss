@@ -50,3 +50,36 @@ tr {
   text-align: left 
 }
 
+.loan-row-block {
+  background-color: $c-white;
+  border-bottom: 5px solid darken($c-cararra-lt-grey, 10%);
+  margin: .5em 0 .8em;
+  padding: .5em 0;
+  
+  .loan-title {
+    width: 100%;
+    padding: .5em 0; 
+    margin-left: 3%;
+    font-size: 1.5em;
+  }
+
+  .loan-risk {
+    width: 5%;
+  }
+
+  th, td{
+    padding: 0;
+    text-align: center;
+  }
+
+  th {
+    background-color: $c-white;
+    color: $c-dove-grey;
+  }
+  tr {
+    height: 2em;
+    border: none; 
+    font-size: 1em; 
+  }
+}
+
