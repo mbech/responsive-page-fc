@@ -1,4 +1,7 @@
 RPFC.tableLoader = (function(){
+  var serverData = {};
+
+  // Pagination State
   var itemsPerPage = 5; //default, can override
   var currentPage = 0;
 
@@ -20,29 +23,38 @@ RPFC.tableLoader = (function(){
       $tableTarget.empty(); 
       return;
     },
-      load: function(page){
-        if (typeof page === "number"){
-          currentPage = page; 
-        }
+      requestServerData: function(){
         // For real page, this should be called as success callback to an 
         // earlier AJAX request, getting fresh data from the server
         // For this example, I'll use the mock data
-        var data = JSON.parse(RPFC.mockAjax.tableData());
-        
-        // Select subset of data for pagination
+        // Data for the table is cached in the serverData variable
+        return serverData = JSON.parse(RPFC.mockAjax.tableData());
+      },
+
+      render: function(){
+        // Pull out a subset of currently held serverData to render 
+        var renderData = {};
         var minShownIndex = itemsPerPage * currentPage;
         var maxShownIndex = minShownIndex + itemsPerPage;
-        console.log(minShownIndex);
-        console.log(maxShownIndex);
-        data.loans = data.loans.slice(minShownIndex, maxShownIndex);   
+        renderData.loans = serverData.loans.slice(minShownIndex, maxShownIndex);   
             
         // Clear out currently loaded data and append new subset
         this.clear();
-        $tableTarget.append(createTableHTML(data));
-        return data;
+        $tableTarget.append(createTableHTML(renderData));
+        return renderData;
       },
       setItemsPerPage: function(iPerPage){
-        itemsPerPage = iPerPage;     
+        return itemsPerPage = iPerPage;     
+      },
+      getCurrentPage: function(){
+        return currentPage;
+      },
+      setCurrentPage: function(newPage){
+        if (typeof newPage === "number"){
+        return currentPage = newPage;
+        } else {
+          return undefined; 
+        }
       }
  }
 })();
