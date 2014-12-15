@@ -2,4 +2,6 @@
 // simplicity
 var RPFC = {};
 
-
+$(document).ready(function(){
+  RPFC.tableLoader.load();
+});

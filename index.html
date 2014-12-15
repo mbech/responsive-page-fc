@@ -28,13 +28,13 @@
         <thead>
           <tr>
             <th></th>
-            <th>Loan Title</th>
-            <th>Risk</th>
-            <th>Amount</th>
-            <th>Term</th>
-            <th>Av. Rate</th>
-            <th>Progress</th>
-            <th>Time Left</th>
+            <th class="loan-title">Loan Title</th>
+            <th class="loan-risk">Risk</th>
+            <th class="loan-amount">Amount</th>
+            <th class="loan-term">Term</th>
+            <th class="loan-av-rate">Av. Rate</th>
+            <th class="loan-progress">Progress</th>
+            <th class="loan-time-left">Time Left</th>
           </tr>
         </thead>
         <tbody>
@@ -46,13 +46,13 @@
         <% _.each(loans, function(loan) { %>
           <tr>
           <td class="loan-thumbnail"></td>
-          <td><a href="#"><%=loan.title%></a></td>
-          <td><%=loan.risk%></td>
-          <td>&pound<%=loan.amount%></td>
-          <td><%=loan.term%></td>
-          <td><%=loan.avRate%>%</td>
+          <td class="loan-title"><a href="#"><%=loan.title%></a></td>
+          <td class="loan-risk"><%=loan.risk%></td>
+          <td class="loan-amount">&pound<%=loan.amount%></td>
+          <td class="loan-term"><%=loan.term%></td>
+          <td class="loan-av-rate"><%=loan.avRate%>%</td>
           <td class="loan-progress"><%=loan.progress%></td>
-          <td><%=loan.timeLeft%></td>
+          <td class="loan-time-left"><%=loan.timeLeft%></td>
           </tr>
           <% }); %>
       </script>
