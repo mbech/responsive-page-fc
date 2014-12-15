@@ -38,22 +38,29 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>IMAGE</td>
-            <td>Elevating Profits</td>
-            <td>A</td>
-            <td>$100,000</td>
-            <td>60</td>
-            <td>7.7%</td>
-            <td>----progress-bar----</td>
-            <td>39 minutes</td>
-          </tr>
         </tbody>
       </table>
+
+      <!-- table script template -->
+      <script type="text/underscore-template" id="table-row-template">
+        <% _.each(loans, function(loan) { %>
+          <tr>
+          <td></td>
+          <td><a href="#"><%=loan.title%></a></td>
+          <td><%=loan.risk%></td>
+          <td>&pound<%=loan.amount%></td>
+          <td><%=loan.term%></td>
+          <td><%=loan.avRate%>%</td>
+          <td class="loan-progress"><%=loan.progress%></td>
+          <td><%=loan.timeLeft%></td>
+          </tr>
+          <% }); %>
+      </script>
+
     </main>
     <!-- Vendor Scripts  -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
+    <script src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
 
     <!-- Scripts  -->
     <script src="resources/js/main.js"></script>

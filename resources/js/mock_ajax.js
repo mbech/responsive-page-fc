@@ -1,34 +1,34 @@
 //Object to return mocked ajax data
 RPFC.mockAjax = (function(){
-  var createEntry = function(initObj){
+  var createEntry = function(loan){
     return {
-      loanTitle: initObj.loadTitle,
-      risk: initObj.risk,
-      amount: initObj.amount,
-      term: initObj.term,
-      avRate: initObj.avRate,
-      progress: initObj.progress, 
-      timeLeft: initObj.timeLeft
+      title: loan.title,
+      risk: loan.risk,
+      amount: loan.amount,
+      term: loan.term,
+      avRate: loan.avRate,
+      progress: loan.progress, 
+      timeLeft: loan.timeLeft
     }; 
   }
 
   // create return object and fill with fake data
-  var data = {results:[]};
+  var data = {loans:[]};
   var i = 10; 
   while (i--){
-    data.results.push(createEntry({
-      loanTitle: "Elevating Profits", 
+    data.loans.push(createEntry({
+      title: "Elevating Profits", 
       risk: "A",
-      amount: "100000",
+      amount: "100,000",
       term: 60,
       avRate: "7.7",
       progress: 80,
       timeLeft: "39 minutes"
     })); 
-    data.results.push(createEntry({
-      loanTitle: "Hatching Future Growth", 
+    data.loans.push(createEntry({
+      title: "Hatching Future Growth", 
       risk: "A",
-      amount: "60000",
+      amount: "60,000",
       term: 60,
       avRate: "7.3",
       progress: 100,
