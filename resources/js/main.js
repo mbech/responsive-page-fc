@@ -3,5 +3,5 @@
 var RPFC = {};
 
 $(document).ready(function(){
-  RPFC.tableLoader.load();
+  RPFC.tableLoader.load(0);
 });
