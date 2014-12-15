@@ -1,5 +1,5 @@
 //Object to return mocked ajax data
-var mockAjax = (function(){
+RPFC.mockAjax = (function(){
   var createEntry = function(initObj){
     return {
       loanTitle: initObj.loadTitle,
