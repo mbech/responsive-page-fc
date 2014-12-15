@@ -9,6 +9,10 @@ header {
   width: 100%;
   @include semi-circle-carat();
 
+  @media screen and (min-width: $mc-small){
+    background: url('../../img/borrowed-header-img.jpg') top no-repeat;
+  }
+
   > button {
     background-color: $c-lochmara-blue;  //fallback for gradient failure
     background: linear-gradient(to bottom, $c-curious-blue 49%, $c-lochmara-blue 50%);
