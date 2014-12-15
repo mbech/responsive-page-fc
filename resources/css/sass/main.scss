@@ -3,9 +3,12 @@
 //vendors
 @import "../../../vendors/normalize/normalize.min";
 
-//resources
+//variables
 @import "_base";
-@import "_layout";
 
 //modules
+@import "modules/_semi_circle_carat";
 @import "modules/_table";
+
+//layout
+@import "_layout";

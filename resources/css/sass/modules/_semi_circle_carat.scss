@@ -1,0 +1,36 @@
+@mixin semi-circle-carat {
+  & {
+  position: relative; 
+  }
+
+  &:after {
+    content: "";
+    background-color: $c-cararra-lt-grey;
+    border-top-right-radius: 2em;
+    border-top-left-radius: 2em;
+    bottom: 0;
+    display: block;
+    height: 2em;
+    left: 50%;
+    margin-left: -2em;
+    position: absolute;
+    width: 4em;
+  }
+
+  &:before {
+    content: "";
+    border-color: $c-lochmara-blue;
+    border-style: solid;
+    border-width: 0 .5em .5em 0;
+    bottom: .2em;
+    display: block;
+    height: 1.5em;
+    left: 50%;
+    margin-left: -.75em;
+    position: absolute;
+    transform: rotate(45deg);
+    width: 1.5em;
+    z-index: 1;
+  }
+} 
+

@@ -7,6 +7,7 @@ header {
   padding: 1em 3em 5em;
   text-align: center;
   width: 100%;
+  @include semi-circle-carat();
 
   > button {
     background-color: $c-lochmara-blue;  //fallback for gradient failure
