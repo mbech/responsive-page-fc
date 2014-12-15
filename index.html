@@ -54,7 +54,7 @@
           <td class="loan-amount">&pound<%=loan.amount%></td>
           <td class="loan-term"><%=loan.term%></td>
           <td class="loan-av-rate"><%=loan.avRate%>%</td>
-          <td class="loan-progress"><%=loan.progress%></td>
+          <td class="loan-progress"><progress max="100" value=<%=loan.progress%>></progress></td>
           <td class="loan-time-left"><%=loan.timeLeft%></td>
           </tr>
           <% }); %>

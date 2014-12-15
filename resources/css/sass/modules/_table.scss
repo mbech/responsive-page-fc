@@ -44,7 +44,24 @@ tr {
 .loan-progress{
   text-align: center;
   width: 15%;
+
+
+  progress {
+    width: 5em;
+    -webkit-appearance:none;
+  }
+  progress::-webkit-progress-bar {
+    background: darken($c-cararra-lt-grey, 10%);
+  }
+  progress::-webkit-progress-value {
+    background-color: $c-sushi-green;
+  }
+  progress::-moz-progress-bar {
+    background-color: $c-sushi-green;
+  }
+
 }
+
 
 .loan-time-left {
   text-align: left 
@@ -55,7 +72,7 @@ tr {
   border-bottom: 5px solid darken($c-cararra-lt-grey, 10%);
   margin: .5em 0 .8em;
   padding: .5em 0;
-  
+
   .loan-title {
     width: 100%;
     padding: .5em 0; 
