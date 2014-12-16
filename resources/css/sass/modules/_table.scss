@@ -31,6 +31,10 @@ tr {
   height: 4em;
 }
 
+tr:hover {
+  background-color: darken($c-cararra-lt-grey, 3%);
+}
+
 .loan-title {
   text-align: left;
   padding-left: 1.5em;

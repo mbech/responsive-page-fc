@@ -31,7 +31,9 @@ RPFC.tableLoader = (function(){
 
   var renderPaginationControls = function(){
     // Add html template to page
-    $paginationTarget.append(createPaginationHTML);
+    $paginationTarget.empty().append(createPaginationHTML);
+    bindPaginationControls();
+    $paginationTarget.trigger('paginationChange');
      };
 
   var bindPaginationControls = function(){
@@ -107,16 +109,7 @@ RPFC.tableLoader = (function(){
         itemsPerPage = iPerPage;     
         renderPaginationControls();
       },
-      getCurrentPage: function(){
-        return currentPage;
-      },
-      setCurrentPage: function(newPage){
-        if (typeof newPage === "number"){
-          currentPage = newPage;
-        }
-      },
       bindEvents: function(){
-        bindPaginationControls(); 
         var that = this;
         $paginationTarget.on('paginationChange', function(){
           that.render();

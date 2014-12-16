@@ -15,6 +15,10 @@
     background-color: $c-cararra-lt-grey;
   }
 
+  button:hover {
+    background-color: darken($c-cararra-lt-grey, 3%);
+  }
+
   button:focus {
     outline: 0;
   }

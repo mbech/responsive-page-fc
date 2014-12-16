@@ -1,5 +1,5 @@
 /* Page-specific styles */
-// header layout
+// header
 header {
   background-color: $c-mine-shaft-grey;
   color: $c-white;
@@ -22,6 +22,10 @@ header {
     font-size: 1.2em;
     margin: 0.5em 0;
     padding: .7em .7em;
+  }
+
+  > button:hover{
+    background: $c-lochmara-blue; 
   }
 
   > h1, h3 {
