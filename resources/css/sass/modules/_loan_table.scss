@@ -11,6 +11,22 @@ th {
   color: $c-lochmara-blue;
 }
 
+//Act like links for sorting
+.is-sort-prop {
+  cursor: pointer;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  &:hover {
+    color: black; 
+  }
+}
+
 th, tr:nth-child(even){
   background-color: lighten($c-cararra-lt-grey, 3%);
 }
@@ -57,7 +73,7 @@ tr:hover {
 }
 
 td.loan-thumbnail {
-    background: $c-dove-grey;
+  background: $c-dove-grey;
 }
 
 .loan-time-left {

@@ -76,17 +76,37 @@ RPFC.tableLoader = (function(){
     }); 
   };
 
+  // Implement a basic sort, relies on data-sort-prop in html for prop lookup
+  var bindSorting = function(renderCallback){
+    // Bind to #table-target as it is constant, unlike templates
+    $('#table-target').on('click', 'th.is-sort-prop', function(e){
+      console.log("clicked!");
+      var sortProp = ($(this).data('sort-prop')); 
+
+      serverData.sort(function(a, b){
+        if (a[sortProp] > b[sortProp]) {
+          return 1;
+        }
+        if (a[sortProp] < b[sortProp]) {
+          return -1;
+        }
+        return 0;
+      });
+      renderCallback();
+    });
+  }
+
   //Return public API of tableLoader
   return {
-      requestServerData: function(){
-        // For a real page, this would be asynchrnous (AJAX request). 
-        // It would call 'render()' on success, some visual feedback on fail.
-        // For this example, I'll use the mock data
+    requestServerData: function(){
+      // For a real page, this would be asynchrnous (AJAX request). 
+      // It would call 'render()' on success, some visual feedback on fail.
+      // For this example, I'll use the mock data
 
-        // Most recent data for the table is cached in the serverData variable
-        serverData = JSON.parse(RPFC.mockAjax.tableData());
-        totalNumOfItems = serverData.length;
-      },
+      // Most recent data for the table is cached in the serverData variable
+      serverData = JSON.parse(RPFC.mockAjax.tableData());
+      totalNumOfItems = serverData.length;
+    },
 
       render: function(){
         // Pull out a subset of currently held serverData to render based on
@@ -95,7 +115,7 @@ RPFC.tableLoader = (function(){
         var minShownIndex = itemsPerPage * currentPage;
         var maxShownIndex = minShownIndex + itemsPerPage;
         renderData = serverData.slice(minShownIndex, maxShownIndex);   
-            
+
         // Check if it's the initial load, (target empty, no children)
         // replaceWith used instead of empty/append to prevent div collapsing 
         // and shifting window position (resembled a page reload jump).
@@ -109,15 +129,18 @@ RPFC.tableLoader = (function(){
           $tableTarget.hide().append(createTableHTML(renderData)).fadeTo(500, 1);
         }
       },
+
       setItemsPerPage: function(iPerPage){
         itemsPerPage = iPerPage;     
         renderPaginationControls();
       },
+
       bindEvents: function(){
+        bindSorting(this.render);
         var that = this;
         $paginationTarget.on('paginationChange', function(){
           that.render();
         });
       }
- };
+  };
 })();
