@@ -1,6 +1,7 @@
-// Returns object that handles all table-related data-fetching, templating,
-// pagination, and bidings
+// Object with function to handle all table-related data-fetching, templating,
+// pagination, and bindings
 RPFC.tableLoader = (function(){
+  // Stores most recent response from the server
   var serverData = {};
 
   // Pagination settings and page state
@@ -76,13 +77,12 @@ RPFC.tableLoader = (function(){
     }); 
   };
 
-  // Implement a basic sort, relies on data-sort-prop in html for prop lookup
+  // Implement a basic (type-ignorant) ascending sort as an example,
+  // relies on data-sort-prop in html for prop lookup
   var bindSorting = function(renderCallback){
     // Bind to #table-target as it is constant, unlike templates
     $('#table-target').on('click', 'th.is-sort-prop', function(e){
-      console.log("clicked!");
       var sortProp = ($(this).data('sort-prop')); 
-
       serverData.sort(function(a, b){
         if (a[sortProp] > b[sortProp]) {
           return 1;
@@ -94,7 +94,7 @@ RPFC.tableLoader = (function(){
       });
       renderCallback();
     });
-  }
+  };
 
   //Return public API of tableLoader
   return {
@@ -132,10 +132,11 @@ RPFC.tableLoader = (function(){
 
       setItemsPerPage: function(iPerPage){
         itemsPerPage = iPerPage;     
+        //redraw pagination controls, as the number of pages likely changed
         renderPaginationControls();
       },
 
-      bindEvents: function(){
+      initialBindings : function(){
         bindSorting(this.render);
         var that = this;
         $paginationTarget.on('paginationChange', function(){
