@@ -1,4 +1,4 @@
-//Supply mocked ajax data
+//Create mocked ajax data
 RPFC.mockAjax = (function(){
   var createEntry = function(loan){
     return {

@@ -8,6 +8,7 @@ th {
   text-align: left;
   height: 3em;
   font-weight: normal;
+  color: $c-lochmara-blue;
 }
 
 th, tr:nth-child(even){
@@ -17,14 +18,7 @@ th, tr:nth-child(even){
 th, td {
   text-align: right;
   width: 10%;
-  padding-right: 5%;
 }
-
-.loan-thumbnail {
-  width: 5em;
-  background: $c-dove-grey;
-}
-
 tr {
   background-color: $c-white;
   border-bottom: 1px solid $c-cararra-lt-grey;
@@ -35,20 +29,9 @@ tr:hover {
   background-color: darken($c-cararra-lt-grey, 3%);
 }
 
-.loan-title {
-  text-align: left;
-  padding-left: 1.5em;
-  width: 30%;
-}
-
-.loan-risk {
-  text-align: center;
-}
-
 .loan-progress{
   text-align: center;
   width: 15%;
-
 
   progress {
     width: 5em;
@@ -63,14 +46,31 @@ tr:hover {
   progress::-moz-progress-bar {
     background-color: $c-sushi-green;
   }
-
 }
 
+.loan-risk {
+  text-align: center;
+}
+
+.loan-thumbnail {
+  width: 5em;
+}
+
+td.loan-thumbnail {
+    background: $c-dove-grey;
+}
 
 .loan-time-left {
-  text-align: left 
+  text-align: left;
 }
 
+.loan-title {
+  text-align: left;
+  padding-left: 1.5em;
+  width: 30%;
+}
+
+// Styling for small screen, block-list table
 .loan-row-block {
   background-color: $c-white;
   border-bottom: 5px solid darken($c-cararra-lt-grey, 10%);

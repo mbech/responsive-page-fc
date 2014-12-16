@@ -1,3 +1,5 @@
+// Returns object that handles all table-related data-fetching, templating,
+// pagination, and bidings
 RPFC.tableLoader = (function(){
   var serverData = {};
 
