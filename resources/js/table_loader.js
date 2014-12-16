@@ -1,22 +1,32 @@
 RPFC.tableLoader = (function(){
   var serverData = {};
 
-  // Pagination State
+  // Pagination settings and page state
+  var totalNumOfItems;
   var itemsPerPage = 5; //default, can override
   var currentPage = 0;
 
   var $tableTarget = $('#table-target');
+  var $paginationControllTarget = $('#pagination-control-target');
 
   var createTableHTML = function(data){
     //Select a table template based on current window width
     //This means requires a reload on resize, but deemed preferrable to
     //checking on jQuery resize event
-    var template  = $(window).width() < 780 ? 
-                    $('#table-row-template-sm').html() :
-                    $('#table-row-template').html();
+    var template = $(window).width() < 780 ? 
+                   $('#table-row-template-sm').html() :
+                   $('#table-row-template').html();
 
-    return  _.template(template, data);
+    return  _.template(template, {rowData: data});
   };
+
+  var createPaginationButtonHTML = function(){
+    // Figure out how many pages (buttons) are needed
+    var numPages = Math.ceil(totalNumOfItems / itemsPerPage);
+
+    var template = $('#table-pagination-template').html(); 
+    return _.template(template, {pages: _.range(numPages)});
+  }
 
   //Return public API of tableLoader
   return {
@@ -31,6 +41,7 @@ RPFC.tableLoader = (function(){
 
         // Most recent data for the table is cached in the serverData variable
         serverData = JSON.parse(RPFC.mockAjax.tableData());
+        totalNumOfItems = serverData.length;
       },
 
       render: function(){
@@ -39,7 +50,7 @@ RPFC.tableLoader = (function(){
         var renderData = {};
         var minShownIndex = itemsPerPage * currentPage;
         var maxShownIndex = minShownIndex + itemsPerPage;
-        renderData.loans = serverData.loans.slice(minShownIndex, maxShownIndex);   
+        renderData = serverData.slice(minShownIndex, maxShownIndex);   
             
         // Clear out currently loaded data and append new subset
         this.clear();
@@ -55,6 +66,7 @@ RPFC.tableLoader = (function(){
         if (typeof newPage === "number"){
           currentPage = newPage;
         }
-      }
+      },
+      htmlTest: createPaginationButtonHTML
  };
 })();

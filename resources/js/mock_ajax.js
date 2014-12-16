@@ -12,13 +12,13 @@ RPFC.mockAjax = (function(){
     }; 
   };
 
-  // create return object and fill with fake data
-  var data = {loans:[]};
+  // create return array and fill with fake data
+  var data = [];
   var i = 20; 
   var titles = ["Elevating Profits", "Hatching Future Growth", "Expansion Funding", "Expansion Capital"];
   var amounts = ["100,000", "60,000", "80,000"];
   while (i--){
-    data.loans.push(createEntry({
+    data.push(createEntry({
       title: titles[Math.floor(Math.random()*titles.length)], 
       risk: "A",
       amount: amounts[Math.floor(Math.random()*amounts.length)], 

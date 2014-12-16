@@ -28,6 +28,9 @@
 
       </div>
 
+      <div id="pagination-control-target">
+      </div>
+
       <!-- table script templates -->
       <!-- Template for medium to large screens-->
       <script type="text/underscore-template" id="table-row-template">
@@ -46,7 +49,7 @@
         </thead>
         <tbody>
 
-        <% _.each(loans, function(loan) { %>
+        <% _.each(rowData, function(loan) { %>
           <tr>
           <td class="loan-thumbnail"></td>
           <td class="loan-title"><a href="#"><%=loan.title%></a></td>
@@ -64,7 +67,7 @@
 
       <!-- Template for smaller screens-->
       <script type="text/underscore-template" id="table-row-template-sm">
-        <% _.each(loans, function(loan) { %>
+        <% _.each(rowData, function(loan) { %>
           <div class="loan-row-block">
           <div class="loan-title">
           <a href="#"><%=loan.title%></a>
@@ -91,6 +94,15 @@
           </table>
           </div>
        <% }); %>
+      </script>
+
+      <!-- Template for pagination controls -->
+      <script type="text/underscore-template" id="table-pagination-template">
+        <% _.each(pages, function(page){ %>
+          <button type="button" data-page-num=<%=page%>><%=page%></button>
+          <% }); %>
+        <button type="button">Next</button>
+        <button type="button">Last</button>
       </script>
 
     </main>
