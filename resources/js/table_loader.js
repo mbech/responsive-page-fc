@@ -101,7 +101,7 @@ RPFC.tableLoader = (function(){
         // and shifting window position (resembled a page reload jump).
         if ($tableTarget.children().length) {
           $tableTarget.fadeTo(250,0, function(){
-            $(this).children().replaceWith(createTableHTML(renderData))
+            $(this).children().replaceWith(createTableHTML(renderData));
             $(this).fadeTo(250,1);
           });
         } else {
