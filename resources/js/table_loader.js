@@ -5,6 +5,7 @@ RPFC.tableLoader = (function(){
   var totalNumOfItems;
   var itemsPerPage = 5; //default, can override
   var currentPage = 0;
+  var numPages = 0;
 
   // stored jQuery selections
   var $tableTarget = $('#table-target');
@@ -23,7 +24,7 @@ RPFC.tableLoader = (function(){
 
   // Pagination creation/render/update functionality
   var createPaginationHTML = function(){
-    var numPages = Math.ceil(totalNumOfItems / itemsPerPage);
+    numPages = Math.ceil(totalNumOfItems / itemsPerPage);
     var template = $('#table-pagination-template').html(); 
     return _.template(template, {pages: _.range(numPages)});
   };
@@ -42,11 +43,28 @@ RPFC.tableLoader = (function(){
   
     // Add bidings to buttons
     $buttons.on('click', function(e){
-      $buttons.removeClass('current-page');
-      $(this).addClass('current-page');
-      currentPage = $(this).data('page-num');
-      //trigger event to notify that a re-render is needed
-      $(this).trigger('paginationChange');
+      //special cases for 'next' and 'last' buttons
+      if ($(this).data('page-num') === "next"){
+        currentPage = (currentPage === numPages - 1) ? currentPage : currentPage + 1;
+        $paginationTarget.find("[data-page-num=" + currentPage + "]").addClass('current-page');
+      }
+      else if ($(this).data('page-num') === "last"){
+        currentPage = numPages - 1; 
+        console.log("[data-page-num" + currentPage + "]");
+        $paginationTarget.find("[data-page-num=" + currentPage + "]").addClass('current-page');
+
+      } else {
+      //Handle page number button being pressed
+        if ($(this).data('page-num') == currentPage){
+          //Current page button clicked again, do nothing 
+          return;
+        }
+        $buttons.removeClass('current-page');
+        $(this).addClass('current-page');
+        currentPage = $(this).data('page-num');
+      }
+    //trigger event to notify that a re-render is needed
+    $(this).trigger('paginationChange');
     }); 
   };
 
@@ -68,8 +86,6 @@ RPFC.tableLoader = (function(){
         var renderData = {};
         var minShownIndex = itemsPerPage * currentPage;
         var maxShownIndex = minShownIndex + itemsPerPage;
-        console.log(minShownIndex);
-        console.log(maxShownIndex);
         renderData = serverData.slice(minShownIndex, maxShownIndex);   
             
         // Check if it's the initial load, i.e. target empty

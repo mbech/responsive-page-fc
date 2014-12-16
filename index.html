@@ -106,8 +106,8 @@
         <% _.each(pages, function(page){ %>
           <button type="button" data-page-num=<%=page%>><%=page + 1%></button>
           <% }); %>
-        <button type="button">Next</button>
-        <button type="button">Last</button>
+        <button type="button" data-page-num="next">Next</button>
+        <button type="button" data-page-num="last">Last</button>
         </div>
       </script>
 
