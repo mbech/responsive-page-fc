@@ -6,8 +6,9 @@ RPFC.tableLoader = (function(){
   var itemsPerPage = 5; //default, can override
   var currentPage = 0;
 
+  // stored jQuery selections
   var $tableTarget = $('#table-target');
-  var $paginationControllTarget = $('#pagination-control-target');
+  var $paginationTarget = $('#pagination-control-target');
 
   var createTableHTML = function(data){
     //Select a table template based on current window width
@@ -20,6 +21,7 @@ RPFC.tableLoader = (function(){
     return  _.template(template, {rowData: data});
   };
 
+  // Pagination creation/render/update functionality
   var createPaginationHTML = function(){
     var numPages = Math.ceil(totalNumOfItems / itemsPerPage);
     var template = $('#table-pagination-template').html(); 
@@ -27,15 +29,29 @@ RPFC.tableLoader = (function(){
   };
 
   var renderPaginationControls = function(){
-        $paginationControllTarget.append(createPaginationHTML);
-  }
+    // Add html template to page
+    $paginationTarget.append(createPaginationHTML);
+     };
+
+  var bindPaginationControls = function(){
+    // Select buttons, set initial current-button class based on currentPage var
+    var $buttons = $paginationTarget.find('button');
+    var $currentBtn= $buttons.filter(function() { 
+      return $(this).data("page-num") == currentPage;
+    });
+  
+    // Add bidings to buttons
+    $buttons.on('click', function(e){
+      $buttons.removeClass('current-page');
+      $(this).addClass('current-page');
+      currentPage = $(this).data('page-num');
+      //trigger event to notify that a re-render is needed
+      $(this).trigger('paginationChange');
+    }); 
+  };
 
   //Return public API of tableLoader
   return {
-    clear: function(){
-      $tableTarget.empty(); 
-      return;
-    },
       requestServerData: function(){
         // For a real page, this would be asynchrnous (AJAX request). 
         // It would call 'render()' on success, some visual feedback on fail.
@@ -52,11 +68,21 @@ RPFC.tableLoader = (function(){
         var renderData = {};
         var minShownIndex = itemsPerPage * currentPage;
         var maxShownIndex = minShownIndex + itemsPerPage;
+        console.log(minShownIndex);
+        console.log(maxShownIndex);
         renderData = serverData.slice(minShownIndex, maxShownIndex);   
             
-        // Clear out currently loaded data and append new subset
-        this.clear();
-        $tableTarget.append(createTableHTML(renderData));
+        // Check if it's the initial load, i.e. target empty
+        // replaceWith used instead of empty/append to prevent div collapsing 
+        // and shifting window position (resembling a page reload).
+        if ($tableTarget.children().length) {
+          $tableTarget.fadeTo(250,0, function(){
+            $(this).children().replaceWith(createTableHTML(renderData))
+            $(this).fadeTo(250,1);
+          });
+        } else {
+          $tableTarget.hide().append(createTableHTML(renderData)).fadeTo(500, 1);
+        }
       },
       setItemsPerPage: function(iPerPage){
         itemsPerPage = iPerPage;     
@@ -70,5 +96,12 @@ RPFC.tableLoader = (function(){
           currentPage = newPage;
         }
       },
+      bindEvents: function(){
+        bindPaginationControls(); 
+        var that = this;
+        $paginationTarget.on('paginationChange', function(){
+          that.render();
+        });
+      }
  };
 })();

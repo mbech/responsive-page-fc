@@ -34,6 +34,7 @@
       <!-- table script templates -->
       <!-- Template for medium to large screens-->
       <script type="text/underscore-template" id="table-row-template">
+        <div class="table-contents">
         <table>
         <thead>
         <tr>
@@ -63,10 +64,12 @@
           <% }); %>
         </tbody>
         </table>
+        </div>
       </script>
 
       <!-- Template for smaller screens-->
       <script type="text/underscore-template" id="table-row-template-sm">
+        <div class="table-contents">
         <% _.each(rowData, function(loan) { %>
           <div class="loan-row-block">
           <div class="loan-title">
@@ -94,15 +97,18 @@
           </table>
           </div>
        <% }); %>
+       </div>
       </script>
 
       <!-- Template for pagination controls -->
       <script type="text/underscore-template" id="table-pagination-template">
+        <div class="pagination-controls">
         <% _.each(pages, function(page){ %>
           <button type="button" data-page-num=<%=page%>><%=page + 1%></button>
           <% }); %>
         <button type="button">Next</button>
         <button type="button">Last</button>
+        </div>
       </script>
 
     </main>
