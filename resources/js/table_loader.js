@@ -20,12 +20,14 @@ RPFC.tableLoader = (function(){
     return  _.template(template, {rowData: data});
   };
 
-  var createPaginationButtonHTML = function(){
-    // Figure out how many pages (buttons) are needed
+  var createPaginationHTML = function(){
     var numPages = Math.ceil(totalNumOfItems / itemsPerPage);
-
     var template = $('#table-pagination-template').html(); 
     return _.template(template, {pages: _.range(numPages)});
+  };
+
+  var renderPaginationControls = function(){
+        $paginationControllTarget.append(createPaginationHTML);
   }
 
   //Return public API of tableLoader
@@ -58,6 +60,7 @@ RPFC.tableLoader = (function(){
       },
       setItemsPerPage: function(iPerPage){
         itemsPerPage = iPerPage;     
+        renderPaginationControls();
       },
       getCurrentPage: function(){
         return currentPage;
@@ -67,6 +70,5 @@ RPFC.tableLoader = (function(){
           currentPage = newPage;
         }
       },
-      htmlTest: createPaginationButtonHTML
  };
 })();

@@ -99,7 +99,7 @@
       <!-- Template for pagination controls -->
       <script type="text/underscore-template" id="table-pagination-template">
         <% _.each(pages, function(page){ %>
-          <button type="button" data-page-num=<%=page%>><%=page%></button>
+          <button type="button" data-page-num=<%=page%>><%=page + 1%></button>
           <% }); %>
         <button type="button">Next</button>
         <button type="button">Last</button>
