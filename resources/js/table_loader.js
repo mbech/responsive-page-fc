@@ -37,22 +37,25 @@ RPFC.tableLoader = (function(){
   var bindPaginationControls = function(){
     // Select buttons, set initial current-button class based on currentPage var
     var $buttons = $paginationTarget.find('button');
-    var $currentBtn= $buttons.filter(function() { 
+    var $initialBtn= $buttons.filter(function() { 
       return $(this).data("page-num") == currentPage;
     });
+    $initialBtn.addClass('current-page');
   
-    // Add bidings to buttons
+    // Add bindings  to buttons
     $buttons.on('click', function(e){
-      //special cases for 'next' and 'last' buttons
-      if ($(this).data('page-num') === "next"){
-        currentPage = (currentPage === numPages - 1) ? currentPage : currentPage + 1;
-        $paginationTarget.find("[data-page-num=" + currentPage + "]").addClass('current-page');
-      }
-      else if ($(this).data('page-num') === "last"){
-        currentPage = numPages - 1; 
-        console.log("[data-page-num" + currentPage + "]");
-        $paginationTarget.find("[data-page-num=" + currentPage + "]").addClass('current-page');
+      var clickedPage = $(this).data('page-num');
 
+      //special cases for 'next' and 'last' buttons
+      if ( typeof clickedPage != "number") {
+        if (clickedPage === "next") {
+        currentPage = (currentPage === numPages - 1) ? currentPage : currentPage + 1;
+        }
+        if (clickedPage === "last"){
+        currentPage = numPages - 1; 
+        }
+        $buttons.removeClass('current-page');
+        $paginationTarget.find("[data-page-num=" + currentPage + "]").addClass('current-page');
       } else {
       //Handle page number button being pressed
         if ($(this).data('page-num') == currentPage){

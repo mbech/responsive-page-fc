@@ -1,12 +1,21 @@
 .pagination-controls{
-  background-color: green;
   margin: 1em 0 3em;
   text-align: center;
+  font-size: 1.2em;
   button{
-  
+    padding: .4em .7em;
+    margin: 0 .2em;
+    border: none;
+    color: $c-lochmara-blue; 
+    background: $c-white;
   }
 
   button.current-page {
-  
+    color: $c-black; 
+    background-color: $c-cararra-lt-grey;
+  }
+
+  button:focus {
+    outline: 0;
   }
 }
