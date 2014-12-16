@@ -15,24 +15,27 @@ RPFC.tableLoader = (function(){
                     $('#table-row-template-sm').html() :
                     $('#table-row-template').html();
 
-    return  _.template(template, data)
+    return  _.template(template, data);
   };
 
+  //Return public API of tableLoader
   return {
     clear: function(){
       $tableTarget.empty(); 
       return;
     },
       requestServerData: function(){
-        // For real page, this should be called as success callback to an 
-        // earlier AJAX request, getting fresh data from the server
+        // For a real page, this would be asynchrnous (AJAX request). 
+        // It would call 'render()' on success, some visual feedback on fail.
         // For this example, I'll use the mock data
-        // Data for the table is cached in the serverData variable
-        return serverData = JSON.parse(RPFC.mockAjax.tableData());
+
+        // Most recent data for the table is cached in the serverData variable
+        serverData = JSON.parse(RPFC.mockAjax.tableData());
       },
 
       render: function(){
-        // Pull out a subset of currently held serverData to render 
+        // Pull out a subset of currently held serverData to render based on
+        // currently stored pagination state
         var renderData = {};
         var minShownIndex = itemsPerPage * currentPage;
         var maxShownIndex = minShownIndex + itemsPerPage;
@@ -41,20 +44,17 @@ RPFC.tableLoader = (function(){
         // Clear out currently loaded data and append new subset
         this.clear();
         $tableTarget.append(createTableHTML(renderData));
-        return renderData;
       },
       setItemsPerPage: function(iPerPage){
-        return itemsPerPage = iPerPage;     
+        itemsPerPage = iPerPage;     
       },
       getCurrentPage: function(){
         return currentPage;
       },
       setCurrentPage: function(newPage){
         if (typeof newPage === "number"){
-        return currentPage = newPage;
-        } else {
-          return undefined; 
+          currentPage = newPage;
         }
       }
- }
+ };
 })();

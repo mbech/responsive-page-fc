@@ -1,4 +1,4 @@
-//Object to return mocked ajax data
+//Supply mocked ajax data
 RPFC.mockAjax = (function(){
   var createEntry = function(loan){
     return {
@@ -10,7 +10,7 @@ RPFC.mockAjax = (function(){
       progress: loan.progress, 
       timeLeft: loan.timeLeft
     }; 
-  }
+  };
 
   // create return object and fill with fake data
   var data = {loans:[]};
@@ -29,6 +29,7 @@ RPFC.mockAjax = (function(){
     })); 
   }
 
+  //Return public method for generating JSON 'response'
   return {
     tableData: function(){
       return JSON.stringify(data); 
