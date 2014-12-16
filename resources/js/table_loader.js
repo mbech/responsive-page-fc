@@ -37,8 +37,9 @@ RPFC.tableLoader = (function(){
      };
 
   var bindPaginationControls = function(){
-    // Select buttons, set initial current-button class based on currentPage var
     var $buttons = $paginationTarget.find('button');
+
+    // Set initial current-button class based on currentPage var
     var $initialBtn= $buttons.filter(function() { 
       return $(this).data("page-num") == currentPage;
     });
@@ -93,15 +94,16 @@ RPFC.tableLoader = (function(){
         var maxShownIndex = minShownIndex + itemsPerPage;
         renderData = serverData.slice(minShownIndex, maxShownIndex);   
             
-        // Check if it's the initial load, i.e. target empty
+        // Check if it's the initial load, (target empty, no children)
         // replaceWith used instead of empty/append to prevent div collapsing 
-        // and shifting window position (resembling a page reload).
+        // and shifting window position (resembled a page reload jump).
         if ($tableTarget.children().length) {
           $tableTarget.fadeTo(250,0, function(){
             $(this).children().replaceWith(createTableHTML(renderData))
             $(this).fadeTo(250,1);
           });
         } else {
+          //initial fade in
           $tableTarget.hide().append(createTableHTML(renderData)).fadeTo(500, 1);
         }
       },
